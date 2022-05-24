@@ -1,0 +1,21 @@
+name: Acción Apache Bench
+description: Ejecuta pruebas de carga usando Apache Bench
+
+inputs:
+  url:
+    description: 'URL donde realizar las pruebas.'
+    required: true
+  number-of-requests:
+    description: 'Número de peticiones en total.'
+    required: false
+    default: '1000'
+  concurrency:
+    description: 'Número de peticiones concurrentes.'
+    required: false
+    default: '50'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    INPUT_NUMBER_OF_REQUESTS: ${{ inputs.number-of-requests }}

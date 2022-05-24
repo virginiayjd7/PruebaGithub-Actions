@@ -1,0 +1,16 @@
+name: Pruebas de carga
+
+on:
+  workflow_dispatch:
+jobs:
+    load-test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Clonar repositorio
+          uses: actions/checkout@v2
+        - name: Ejecutar pruebas de carga
+          uses: ./load-test-action
+          with:
+            url: https://jugar-pokemon.netlify.app/
+            number-of-requests: 10
+            concurrency: 2
