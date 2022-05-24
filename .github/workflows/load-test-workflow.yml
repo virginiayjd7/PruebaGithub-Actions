@@ -2,7 +2,7 @@ name: Pruebas de carga
 
 on:
   workflow_dispatch:
-  inputs:
+    inputs:
       number-of-requests:
         description: 'Número de peticiones en total'
         required: false
@@ -15,10 +15,10 @@ jobs:
     load-test:
       runs-on: ubuntu-latest
       strategy:
-      matrix:
-        url:
-          - https://www.basefactor.com/
-          - https://jugar-pokemon.netlify.app/
+        matrix:
+          url:
+            - https://www.basefactor.com/
+            - https://jugar-pokemon.netlify.app/
       steps:
         - name: Clonar repositorio
           uses: actions/checkout@v2
