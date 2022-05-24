@@ -10,7 +10,7 @@ on:
       concurrency:
         description: 'Número de peticiones concurrentes'
         required: false
-        default: '50
+        default: '50'
 jobs:
     load-test:
       runs-on: ubuntu-latest
