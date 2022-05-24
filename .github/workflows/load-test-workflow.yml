@@ -2,15 +2,29 @@ name: Pruebas de carga
 
 on:
   workflow_dispatch:
+  inputs:
+      number-of-requests:
+        description: 'Número de peticiones en total'
+        required: false
+        default: '1000'
+      concurrency:
+        description: 'Número de peticiones concurrentes'
+        required: false
+        default: '50
 jobs:
     load-test:
       runs-on: ubuntu-latest
+      strategy:
+      matrix:
+        url:
+          - https://www.basefactor.com/
+          - https://jugar-pokemon.netlify.app/
       steps:
         - name: Clonar repositorio
           uses: actions/checkout@v2
         - name: Ejecutar pruebas de carga
           uses: ./load-test-action
           with:
-            url: https://jugar-pokemon.netlify.app/
-            number-of-requests: 10
-            concurrency: 2
+            url: ${{matrix.url}}
+            number-of-requests: ${{github.event.inputs.number-of-requests}}
+            concurrency: ${{github.event.inputs.concurrency}}
